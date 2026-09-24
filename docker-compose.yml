@@ -1,0 +1,12 @@
+services:
+  antispam:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      # A named volume inherits /data's ownership from the image, so the
+      # non-root bot user can write to it without any host-side chown.
+      - antispam-data:/data
+
+volumes:
+  antispam-data:
